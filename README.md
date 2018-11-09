@@ -2,8 +2,7 @@
 
 ## Overview
 
-This image contains the necessary files for running
-Icarus Verilog
+A debian image that automatically compiles and installs the latest version of Icarus Verilog
 
 ## Build image
 
