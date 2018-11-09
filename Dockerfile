@@ -1,11 +1,9 @@
 FROM debian:stretch as builder
 
-ENV IVERILOG_VERSION=v10_2
-
 LABEL \
-      com.github.lerwys.docker.dockerfile="Dockerfile" \
-      com.github.lerwys.vcs-type="Git" \
-      com.github.lerwys.vcs-url="https://github.com/lerwys/docker-iverilog.git"
+      com.github.nint8835.docker.dockerfile="Dockerfile" \
+      com.github.nint8835.vcs-type="Git" \
+      com.github.nint8835.vcs-url="https://github.com/nint8835/docker-iverilog.git"
 
 ARG DEBIAN_FRONTEND=noninteractive
 
@@ -20,7 +18,7 @@ RUN apt-get -y update && \
         git && \
     rm -rf /var/lib/apt/lists/*
 
-RUN git clone --branch=${IVERILOG_VERSION} https://github.com/steveicarus/iverilog && \
+RUN git clone https://github.com/steveicarus/iverilog && \
     cd iverilog && \
     bash autoconf.sh && \
     ./configure && \
@@ -32,3 +30,4 @@ RUN git clone --branch=${IVERILOG_VERSION} https://github.com/steveicarus/iveril
 FROM debian:stretch
 
 COPY --from=builder /usr/local/bin /usr/local/bin
+COPY --from=builder /usr/local/lib /usr/local/lib
